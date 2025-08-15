@@ -16,6 +16,8 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
         @livewireScripts
@@ -24,7 +26,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
-    <body>
+    <body class="bg-stone-50 text-gray-800">
         @yield('body')
     </body>
+
+    @stack('scripts')
 </html>

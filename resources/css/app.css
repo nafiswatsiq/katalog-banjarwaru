@@ -20,3 +20,10 @@ input:invalid, textarea:invalid, select:invalid {
 [x-cloak] {
     display: none;
 }
+
+:root {
+    --forest-green: #2F4F4F;
+    --bamboo-brown: #D2B48C;
+    --cream: #F5F5DC;
+    --dark-gray: #333333;
+}
