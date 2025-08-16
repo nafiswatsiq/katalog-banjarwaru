@@ -27,10 +27,11 @@ class Show extends Component
             'name' => 'Lampu Gantung Bambu Premium',
             'slug' => 'lampu-gantung-bambu-premium',
             'description' => 'Lampu gantung elegan dengan anyaman bambu natural yang memberikan pencahayaan hangat dan nyaman untuk ruang tamu Anda. Dibuat dengan teknik anyaman tradisional yang telah diturunkan turun-temurun.',
-            'detailed_description' => 'Produk kerajinan bambu premium ini dibuat dengan keahlian tinggi oleh pengrajin lokal yang berpengalaman. Setiap detail dikerjakan dengan teliti untuk menghasilkan produk berkualitas tinggi yang tahan lama dan indah dipandang. Bambu yang digunakan telah melalui proses pengeringan dan pengawetan khusus untuk memastikan ketahanan terhadap rayap dan kelembaban.',
+            // 'detailed_description' => 'Produk kerajinan bambu premium ini dibuat dengan keahlian tinggi oleh pengrajin lokal yang berpengalaman. Setiap detail dikerjakan dengan teliti untuk menghasilkan produk berkualitas tinggi yang tahan lama dan indah dipandang. Bambu yang digunakan telah melalui proses pengeringan dan pengawetan khusus untuk memastikan ketahanan terhadap rayap dan kelembaban.',
             'price' => 250000,
             'original_price' => 300000,
             'category' => 'dekorasi',
+            'is_featured' => true,
             'images' => [
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy4a09qhqr8Flb1-0h-1yjRUgtwgWKxzli8g&s',
                 'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/100/MTA-112665592/no-brand_keranjang-bambu-kecil_full01-dd3b7e35.jpg',

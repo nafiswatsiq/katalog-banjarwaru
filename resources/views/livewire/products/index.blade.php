@@ -15,8 +15,15 @@
         </div>
     </section>
     <!-- Page Header -->
-    <section class="bg-gradient-to-r from-green-800 to-green-900 py-16">
-        <div class="container mx-auto lg:px-10 px-4">
+    <section class="h-52 overflow-hidden relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-800 to-green-900 opacity-80 z-10"></div>
+        <div class="flex justify-center items-center h-full">
+            <img src="https://nusantaranews.co/assets/uploads/2016/09/bisnis-kerajinan-bambu.jpg" 
+                alt="Kerajinan Bambu"
+                class="w-full object-cover"
+            >
+        </div>
+        <div class="container mx-auto lg:px-10 px-4 absolute inset-0 flex items-center justify-center z-20">
             <div class="text-center text-white">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Koleksi Produk Kami</h1>
                 <p class="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">
