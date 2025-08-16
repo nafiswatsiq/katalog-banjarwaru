@@ -56,16 +56,6 @@ class Index extends Component
         $this->resetPage();
     }
 
-    // public function addToCart($productId)
-    // {
-    //     // Simulate adding to cart
-    //     // In real application, you would add this to session or database
-    //     session()->flash('message', 'Produk berhasil ditambahkan ke keranjang!');
-        
-    //     // Emit event for any listening components
-    //     $this->dispatch('product-added', productId: $productId);
-    // }
-
     public function getProducts()
     {
         // Mock data for demonstration
@@ -77,10 +67,11 @@ class Index extends Component
                 'slug' => 'lampu-gantung-bambu-premium',
                 'description' => 'Lampu gantung elegan dengan anyaman bambu natural yang memberikan pencahayaan hangat untuk ruang tamu Anda.',
                 'price' => 250000,
+                'original_price' => 300000,
                 'category' => 'dekorasi',
                 'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy4a09qhqr8Flb1-0h-1yjRUgtwgWKxzli8g&s',
                 'is_featured' => true,
-                'is_new' => false,
+                'is_new' => true,
             ],
             [
                 'id' => 2,

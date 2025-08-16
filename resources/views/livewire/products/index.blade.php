@@ -204,11 +204,18 @@
                                         Unggulan
                                     </div>
                                 @endif
-                                @if($product['is_new'])
-                                    <div class="absolute top-4 left-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm">
-                                        Baru
-                                    </div>
-                                @endif
+                                <div class="flex absolute top-4 left-4">
+                                    @if(isset($product['original_price']) && $product['original_price'] > $product['price'])
+                                        <div class="bg-red-600 text-white px-3 py-1 rounded-full text-sm">
+                                            Diskon {{ round((($product['original_price'] - $product['price']) / $product['original_price']) * 100) }}%
+                                        </div>
+                                    @endif
+                                    @if($product['is_new'])
+                                        <div class="bg-amber-600 text-white px-3 py-1 rounded-full text-sm">
+                                            Baru
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                             <div class="p-6">
                                 <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -218,20 +225,19 @@
                                 <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">{{ $product['name'] }}</h3>
                                 <p class="text-gray-600 mb-4 line-clamp-2">{{ $product['description'] }}</p>
                                 <div class="flex items-center justify-between">
-                                    <span class="text-2xl font-bold text-amber-600">Rp {{ number_format($product['price'], 0, ',', '.') }}</span>
+                                    <div>
+                                        @if(isset($product['original_price']) && $product['original_price'] > $product['price'])
+                                            <p class="line-through text-gray-500">Rp {{ number_format($product['original_price'], 0, ',', '.') }}</p>
+                                        @endif
+                                        <p class="text-2xl font-bold text-amber-600">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
+                                    </div>
                                     <button 
-                                        {{-- wire:click="addToCart({{ $product['id'] }})" --}}
                                         class="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-900 transition duration-300 flex items-center space-x-2"
-                                        {{-- wire:loading.attr="disabled" --}}
-                                        {{-- wire:target="addToCart({{ $product['id'] }})" --}}
                                     >
                                         <div>
                                             <i class="fas fa-eye"></i>
                                             <span class="hidden sm:inline">Liat</span>
                                         </div>
-                                        {{-- <div wire:loading wire:target="addToCart({{ $product['id'] }})">
-                                            <i class="fas fa-spinner fa-spin"></i>
-                                        </div> --}}
                                     </button>
                                 </div>
                             </div>
@@ -268,21 +274,30 @@
                                         <p class="text-gray-600 mb-4 leading-relaxed">{{ $product['description'] }}</p>
                                     </div>
                                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                        <span class="text-3xl font-bold text-amber-600">Rp {{ number_format($product['price'], 0, ',', '.') }}</span>
+                                        <div class="flex items-center space-x-4">
+                                            @if(isset($product['original_price']) && $product['original_price'] > $product['price'])
+                                                <span class="text-3xl font-bold text-red-600">
+                                                    Rp {{ number_format($product['price'] ?? 0, 0, ',', '.') }}
+                                                </span>
+                                                <span class="text-xl text-gray-500 line-through">
+                                                    Rp {{ number_format($product['original_price'], 0, ',', '.') }}
+                                                </span>
+                                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium">
+                                                    Hemat {{ round((($product['original_price'] - $product['price']) / $product['original_price']) * 100) }}%
+                                                </span>
+                                            @else
+                                                <span class="text-3xl font-bold text-amber-600">
+                                                    Rp {{ number_format($product['price'] ?? 0, 0, ',', '.') }}
+                                                </span>
+                                            @endif
+                                        </div>
                                         <button 
-                                            {{-- wire:click="addToCart({{ $product['id'] }})" --}}
                                             class="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition duration-300 flex items-center justify-center space-x-2"
-                                            {{-- wire:loading.attr="disabled"
-                                            wire:target="addToCart({{ $product['id'] }})" --}}
                                         >
                                             <div>
                                                 <i class="fas fa-eye"></i>
                                                 <span>Lihat</span>
                                             </div>
-                                            {{-- <div wire:loading wire:target="addToCart({{ $product['id'] }})">
-                                                <i class="fas fa-spinner fa-spin"></i>
-                                                <span>Menambahkan...</span>
-                                            </div> --}}
                                         </button>
                                     </div>
                                 </div>
@@ -324,32 +339,4 @@
             @endif
         </div>
     </section>
-
-    <!-- Toast Notification -->
-    {{-- @if (session()->has('message'))
-        <div 
-            x-data="{ show: true }" 
-            x-show="show" 
-            x-transition
-            x-init="setTimeout(() => show = false, 3000)"
-            class="fixed bottom-4 right-4 bg-green-800 text-white px-6 py-4 rounded-lg shadow-lg z-50"
-        >
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-check-circle"></i>
-                <span>{{ session('message') }}</span>
-            </div>
-        </div>
-    @endif --}}
 </div>
-
-{{-- @push('scripts')
-    <script>
-        // Auto-hide flash messages
-        document.addEventListener('livewire:initialized', () => {
-            Livewire.on('product-added', (event) => {
-                // You can add custom notification logic here
-                console.log('Product added to cart:', event);
-            });
-        });
-    </script>
-@endpush --}}
