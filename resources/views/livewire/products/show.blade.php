@@ -118,15 +118,17 @@
 
                     <!-- Price -->
                     <div class="border-t border-b border-gray-200 py-6">
-                        <div class="flex items-center space-x-4">
+                        <div class="flex lg:flex-row flex-col-reverse lg:items-center space-x-4 gap-y-3">
                             @if(isset($product->original_price) && $product->original_price > $product->price)
-                                <span class="text-3xl lg:text-4xl font-bold text-red-600">
-                                    Rp {{ number_format($product->price ?? 0, 0, ',', '.') }}
-                                </span>
-                                <span class="text-xl text-gray-500 line-through">
-                                    Rp {{ number_format($product->original_price, 0, ',', '.') }}
-                                </span>
-                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium">
+                                <div>
+                                    <span class="text-3xl lg:text-4xl font-bold text-red-600">
+                                        Rp {{ number_format($product->price ?? 0, 0, ',', '.') }}
+                                    </span>
+                                    <span class="text-xl text-gray-500 line-through">
+                                        Rp {{ number_format($product->original_price, 0, ',', '.') }}
+                                    </span>
+                                </div>
+                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium w-fit">
                                     Hemat {{ round((($product->original_price - $product->price) / $product->original_price) * 100) }}%
                                 </span>
                             @else
@@ -203,7 +205,7 @@
                     <!-- Share Product -->
                     <div class="border-t border-gray-200 pt-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3">Bagikan Produk</h3>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex flex-wrap items-center gap-4">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('products.show', $product->slug) }}" target="_blank" rel="noopener noreferrer">
                                 <button class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
                                     <i class="fab fa-facebook-f"></i>
@@ -245,7 +247,7 @@
     <!-- Product Tabs Section -->
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto lg:px-10 px-4">
-            <div class="flex gap-4">
+            <div class="flex lg:flex-row flex-col gap-4">
                 <div class="w-20 h-20 rounded-full overflow-hidden">
                     <img src="{{ $product->store->getFirstMediaUrl('store_images') }}" alt="Product Tabs Icon" class="w-auto h-full object-cover">
                 </div>
@@ -269,17 +271,14 @@
                 </p>
             </div>
 
-            <div class="swiper related-products-swiper">
-                <div class="swiper-wrapper">
-                    @foreach($relatedProducts ?? [] as $relatedProduct)
-                        <livewire:components.product-card 
-                            :product="$relatedProduct" 
-                            :buttonLabel="'Lihat'"
-                            wire:key="product-card-{{ $relatedProduct->id }}"
-                        />
-                    @endforeach
-                </div>
-                <div class="swiper-pagination mt-8"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($relatedProducts ?? [] as $relatedProduct)
+                    <livewire:components.product-card 
+                        :product="$relatedProduct" 
+                        :buttonLabel="'Lihat'"
+                        wire:key="product-card-{{ $relatedProduct->id }}"
+                    />
+                @endforeach
             </div>
         </div>
     </section>
