@@ -171,7 +171,7 @@
                     <div class="flex flex-col items-start justify-start w-full h-auto mb-12 lg:w-1/3 lg:mb-0">
                         <div class="flex items-center justify-center">
                             <div class="w-16 h-16 mr-4 overflow-hidden bg-gray-200 rounded-full">
-                                <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1700&q=80"
+                                <img src="{{ asset('assets/images/user-placeholder.png') }}"
                                     class="object-cover w-full h-full">
                             </div>
                             <div class="flex flex-col items-start justify-center">
@@ -187,7 +187,7 @@
                         class="flex flex-col items-start justify-start w-full h-auto px-0 mx-0 mb-12 border-l border-r border-transparent lg:w-1/3 lg:mb-0 lg:px-8 lg:mx-8 lg:border-gray-200">
                         <div class="flex items-center justify-center">
                             <div class="w-16 h-16 mr-4 overflow-hidden bg-gray-200 rounded-full">
-                                <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2547&q=80"
+                                <img src="{{ asset('assets/images/user-placeholder.png') }}"
                                     class="object-cover w-full h-full">
                             </div>
                             <div class="flex flex-col items-start justify-center">
@@ -202,7 +202,7 @@
                     <div class="flex flex-col items-start justify-start w-full h-auto lg:w-1/3">
                         <div class="flex items-center justify-center">
                             <div class="w-16 h-16 mr-4 overflow-hidden bg-gray-200 rounded-full">
-                                <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1256&q=80"
+                                <img src="{{ asset('assets/images/user-placeholder.png') }}"
                                     class="object-cover w-full h-full">
                             </div>
                             <div class="flex flex-col items-start justify-center">
