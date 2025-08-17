@@ -104,7 +104,6 @@ class ProductResource extends Resource
                     ->label('Gambar Produk')
                     ->collection('images')
                     ->multiple()
-                    ->preserveFilenames()
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_featured')

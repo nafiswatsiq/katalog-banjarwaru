@@ -16,9 +16,9 @@
     </section>
     <!-- Page Header -->
     <section class="h-52 overflow-hidden relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-green-800 to-green-900 opacity-80 z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-green-800 to-green-900 opacity-85 z-10"></div>
         <div class="flex justify-center items-center h-full">
-            <img src="https://nusantaranews.co/assets/uploads/2016/09/bisnis-kerajinan-bambu.jpg" 
+            <img src="{{ asset('assets/images/kerajinan-bambu.jpg') }}" 
                 alt="Kerajinan Bambu"
                 class="w-full object-cover"
             >
@@ -68,10 +68,9 @@
                         class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-800 focus:border-transparent transition duration-300"
                     >
                         <option value="">Semua Kategori</option>
-                        <option value="furniture">Furniture</option>
-                        <option value="dekorasi">Dekorasi</option>
-                        <option value="perabotan">Perabotan</option>
-                        <option value="aksesoris">Aksesoris</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->slug }}">{{ $category->name }}</option>
+                        @endforeach
                     </select>
 
                     <!-- Price Range Filter -->
@@ -92,6 +91,7 @@
                         class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-800 focus:border-transparent transition duration-300"
                     >
                         <option value="newest">Terbaru</option>
+                        <option value="discount">Diskon</option>
                         <option value="price_low">Harga Terendah</option>
                         <option value="price_high">Harga Tertinggi</option>
                         <option value="name">Nama A-Z</option>
@@ -198,118 +198,18 @@
                 @forelse($products as $product)
                     @if($viewType === 'grid')
                         <!-- Grid View Card -->
-                        <a href="{{ route('products.show', $product['slug']) }}" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
-                            <div class="relative overflow-hidden">
-                                <img 
-                                    src="{{ $product['image'] }}" 
-                                    alt="{{ $product['name'] }}" 
-                                    class="w-full h-64 object-cover hover:scale-110 transition duration-300"
-                                    loading="lazy"
-                                >
-                                @if($product['is_featured'])
-                                    <div class="absolute top-4 right-4 bg-green-800 text-white px-3 py-1 rounded-full text-sm">
-                                        Unggulan
-                                    </div>
-                                @endif
-                                <div class="flex absolute top-4 left-4">
-                                    @if(isset($product['original_price']) && $product['original_price'] > $product['price'])
-                                        <div class="bg-red-600 text-white px-3 py-1 rounded-full text-sm">
-                                            Diskon {{ round((($product['original_price'] - $product['price']) / $product['original_price']) * 100) }}%
-                                        </div>
-                                    @endif
-                                    @if($product['is_new'])
-                                        <div class="bg-amber-600 text-white px-3 py-1 rounded-full text-sm">
-                                            Baru
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <div class="flex items-center text-sm text-gray-500 mb-2">
-                                    <i class="fas fa-tag mr-1"></i>
-                                    <span>{{ ucfirst($product['category']) }}</span>
-                                </div>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">{{ $product['name'] }}</h3>
-                                <p class="text-gray-600 mb-4 line-clamp-2">{{ $product['description'] }}</p>
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        @if(isset($product['original_price']) && $product['original_price'] > $product['price'])
-                                            <p class="line-through text-gray-500">Rp {{ number_format($product['original_price'], 0, ',', '.') }}</p>
-                                        @endif
-                                        <p class="text-2xl font-bold text-amber-600">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
-                                    </div>
-                                    <button 
-                                        class="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-900 transition duration-300 flex items-center space-x-2"
-                                    >
-                                        <div>
-                                            <i class="fas fa-eye"></i>
-                                            <span class="hidden sm:inline">Liat</span>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </a>
+                        <livewire:components.product-card 
+                            :product="$product" 
+                            :buttonLabel="'Lihat'"
+                            wire:key="product-card-{{ $product->id }}-{{ $products->currentPage() }}-{{ $sortBy }}-{{ $search }}-{{ $selectedCategory }}-{{ $priceRange }}"
+                        />
                     @else
                         <!-- List View Card -->
-                        <a href="{{ route('products.show', $product['slug']) }}" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-                            <div class="flex flex-col md:flex-row">
-                                <div class="relative md:w-1/3 overflow-hidden">
-                                    <img 
-                                        src="{{ $product['image'] }}" 
-                                        alt="{{ $product['name'] }}" 
-                                        class="w-full h-64 md:h-full object-cover hover:scale-110 transition duration-300"
-                                        loading="lazy"
-                                    >
-                                    @if($product['is_featured'])
-                                        <div class="absolute top-4 right-4 bg-green-800 text-white px-3 py-1 rounded-full text-sm">
-                                            Unggulan
-                                        </div>
-                                    @endif
-                                    @if($product['is_new'])
-                                        <div class="absolute top-4 left-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm">
-                                            Baru
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="p-6 md:w-2/3 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex items-center text-sm text-gray-500 mb-2">
-                                            <i class="fas fa-tag mr-1"></i>
-                                            <span>{{ ucfirst($product['category']) }}</span>
-                                        </div>
-                                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">{{ $product['name'] }}</h3>
-                                        <p class="text-gray-600 mb-4 leading-relaxed">{{ $product['description'] }}</p>
-                                    </div>
-                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                        <div class="flex items-center space-x-4">
-                                            @if(isset($product['original_price']) && $product['original_price'] > $product['price'])
-                                                <span class="text-3xl font-bold text-red-600">
-                                                    Rp {{ number_format($product['price'] ?? 0, 0, ',', '.') }}
-                                                </span>
-                                                <span class="text-xl text-gray-500 line-through">
-                                                    Rp {{ number_format($product['original_price'], 0, ',', '.') }}
-                                                </span>
-                                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium">
-                                                    Hemat {{ round((($product['original_price'] - $product['price']) / $product['original_price']) * 100) }}%
-                                                </span>
-                                            @else
-                                                <span class="text-3xl font-bold text-amber-600">
-                                                    Rp {{ number_format($product['price'] ?? 0, 0, ',', '.') }}
-                                                </span>
-                                            @endif
-                                        </div>
-                                        <button 
-                                            class="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition duration-300 flex items-center justify-center space-x-2"
-                                        >
-                                            <div>
-                                                <i class="fas fa-eye"></i>
-                                                <span>Lihat</span>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        <livewire:components.product-list 
+                            :product="$product" 
+                            :buttonLabel="'Lihat'"
+                            wire:key="product-list-{{ $product->id }}-{{ $products->currentPage() }}-{{ $sortBy }}-{{ $search }}-{{ $selectedCategory }}-{{ $priceRange }}"
+                        />
                     @endif
                 @empty
                     <!-- Empty State -->

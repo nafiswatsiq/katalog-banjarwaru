@@ -51,6 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
         zoom: {
             maxRatio: 3,
         },
+        on: {
+            slideChange: function () {
+                window.dispatchEvent(new CustomEvent('swiper-slide-changed', { detail: { index: this.activeIndex } }));
+            }
+        }
     });
   
     // Related Products Slider

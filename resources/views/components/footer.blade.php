@@ -42,7 +42,7 @@
                 <div class="space-y-3">
                     <div class="flex items-start space-x-3">
                         <i class="fas fa-map-marker-alt text-green-400 mt-1"></i>
-                        <p class="text-gray-300">Jl. Bambu Raya No. 123<br>Banjarwaru, Indonesia</p>
+                        <p class="text-gray-300">Jl. Perintis Kemerdekaan No. 484<br>Banjarwaru, Kec Nusawungu, Cilacap</p>
                     </div>
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-phone text-green-400"></i>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-envelope text-green-400"></i>
-                        <p class="text-gray-300">info@bambubanjarwaru.com</p>
+                        <p class="text-gray-300">banjarwarupemdes@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
         <!-- Bottom Footer -->
         <div class="border-t border-gray-700 mt-12 pt-8 text-center">
             <p class="text-gray-300">
-                © 2025 Kerajinan Bambu Banjarwaru. All Rights Reserved.
+                © 2025 {{ config('app.name') }}. All Rights Reserved.
             </p>
         </div>
     </div>

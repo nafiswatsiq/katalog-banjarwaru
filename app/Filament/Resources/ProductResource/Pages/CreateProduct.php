@@ -28,10 +28,10 @@ class CreateProduct extends CreateRecord
         if (!isset($data['store_id']) || !$data['store_id']) {
             $user = Auth::user();
             $data['store_id'] = $user->store->id;
-            $data['slug'] = Str::slug($user->store->slug . ' ' . $data['name']);
+            $data['slug'] = Str::slug($user->store->slug . ' ' . $data['name'] . ' ' . uniqid());
         } else {
             $user = Store::find($data['store_id']);
-            $data['slug'] = Str::slug($user->slug . ' ' . $data['name']);
+            $data['slug'] = Str::slug($user->slug . ' ' . $data['name'] . ' ' . uniqid());
         }
 
         $data['features'] = json_encode($data['features']);

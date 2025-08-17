@@ -27,3 +27,7 @@ input:invalid, textarea:invalid, select:invalid {
     --cream: #F5F5DC;
     --dark-gray: #333333;
 }
+
+.swiper-button-next:after, .swiper-button-prev:after{
+  content: none!important;
+}

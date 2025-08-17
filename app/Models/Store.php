@@ -24,4 +24,11 @@ class Store extends Model implements HasMedia
     {
         return $this->belongsTo(User::class);
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('store_images')
+            ->useFallbackUrl(asset('assets/images/placeholder.jpeg'))
+            ->singleFile();
+    }
 }

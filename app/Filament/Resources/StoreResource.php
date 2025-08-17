@@ -45,9 +45,10 @@ class StoreResource extends Resource
                     ->label('Nomor WhatsApp')
                     ->required()
                     ->maxLength(255)
-                    ->prefixIcon('heroicon-o-phone')
+                    ->prefix('+62')
                     ->tel()
-                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'),
+                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                    ->hint('Masukan Nomor tanpa 0 atau +62'),
                 Forms\Components\Textarea::make('description')
                     ->label('Deskripsi Toko')
                     ->required()
@@ -63,6 +64,7 @@ class StoreResource extends Resource
                     ->maxLength(255)
                     ->prefixIcon('heroicon-o-map-pin'),
                 Forms\Components\SpatieMediaLibraryFileUpload::make('logo')
+                    ->collection('store_images')
                     ->label('Logo Toko')
                     ->required()
             ]);
@@ -81,6 +83,7 @@ class StoreResource extends Resource
             })
             ->columns([
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('logo')
+                    ->collection('store_images')
                     ->label('Logo'),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Pemilik Toko')

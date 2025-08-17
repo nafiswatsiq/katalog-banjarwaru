@@ -49,7 +49,8 @@ class Product extends Model implements HasMedia
 
     public function getFeatureListAttribute(): array
     {
-        return $this->features ? json_decode($this->features, true) : [];
+        $features = $this->features ? json_decode($this->features, true) : [];
+        return array_column($features, 'name');
     }
 
     public function getSpecificationListAttribute(): array
