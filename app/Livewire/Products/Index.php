@@ -62,8 +62,11 @@ class Index extends Component
     {
         $query = Product::with('category');
 
+        $hasFilters = false;
+
         // Apply search filter
         if ($this->search) {
+            $hasFilters = true;
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
                   ->orWhere('description', 'like', '%' . $this->search . '%');
@@ -72,6 +75,7 @@ class Index extends Component
 
         // Apply category filter
         if ($this->selectedCategory) {
+            $hasFilters = true;
             $query->whereHas('category', function ($q) {
                 $q->where('slug', $this->selectedCategory);
             });
@@ -79,32 +83,38 @@ class Index extends Component
 
         // Apply price range filter
         if ($this->priceRange) {
+            $hasFilters = true;
             [$min, $max] = explode('-', $this->priceRange);
             $query->whereBetween('price', [$min, $max]);
         }
 
-        // Apply sorting
-        switch ($this->sortBy) {
-            case 'discount':
-                $query->orderByRaw('CASE WHEN original_price > price THEN 1 ELSE 0 END DESC');
-                break;
-            case 'price_low':
-                $query->orderBy('price', 'asc');
-                break;
-            case 'price_high':
-                $query->orderBy('price', 'desc');
-                break;
-            case 'name':
-                $query->orderBy('name', 'asc');
-                break;
-            case 'popular':
-                $query->orderBy('is_featured', 'desc');
-                break;
-            case 'newest':
-            default:
-                $query->orderBy('created_at', 'desc');
-                break;
+        // Apply sorting (or random order if no filters)
+        if (!$hasFilters && $this->sortBy === 'newest') {
+            $query->inRandomOrder();
+        } else {
+            switch ($this->sortBy) {
+                case 'discount':
+                    $query->orderByRaw('CASE WHEN original_price > price THEN 1 ELSE 0 END DESC');
+                    break;
+                case 'price_low':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_high':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'name':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'popular':
+                    $query->orderBy('is_featured', 'desc');
+                    break;
+                case 'newest':
+                default:
+                    $query->orderBy('created_at', 'desc');
+                    break;
+            }
         }
+        
         return $query->paginate(12);
     }
 
