@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource;
 use App\Models\Store;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -27,6 +28,16 @@ class CreateProduct extends CreateRecord
     {
         if (!isset($data['store_id']) || !$data['store_id']) {
             $user = Auth::user();
+            if (!$user->store) {
+                Notification::make()
+                    ->title('Toko tidak ditemukan')
+                    ->body('Silakan pilih toko untuk produk ini.')
+                    ->danger()
+                    ->send();
+    
+                $this->halt();
+            }
+            
             $data['store_id'] = $user->store->id;
             $data['slug'] = Str::slug($user->store->slug . ' ' . $data['name'] . ' ' . uniqid());
         } else {
