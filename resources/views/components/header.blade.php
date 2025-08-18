@@ -10,6 +10,7 @@
             <div class="hidden md:flex items-center space-x-8">
                 <a href="{{ url('/') }}#beranda" class="text-gray-700 hover:text-green-800 transition duration-300">Beranda</a>
                 <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-green-800 transition duration-300">Koleksi Produk</a>
+                <a href="{{ route('store.index') }}" class="text-gray-700 hover:text-green-800 transition duration-300">Toko</a>
                 <a href="{{ url('/') }}#tentang" class="text-gray-700 hover:text-green-800 transition duration-300">Tentang Kami</a>
                 <a href="{{ url('/') }}#kontak" class="text-gray-700 hover:text-green-800 transition duration-300">Kontak</a>
             </div>
@@ -44,6 +45,7 @@
             <div class="flex flex-col space-y-3">
                 <a href="{{ url('/') }}#beranda" class="text-gray-700 hover:text-green-800 transition duration-300">Beranda</a>
                 <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-green-800 transition duration-300">Koleksi Produk</a>
+                <a href="{{ route('store.index') }}" class="text-gray-700 hover:text-green-800 transition duration-300">Toko</a>
                 <a href="{{ url('/') }}#tentang" class="text-gray-700 hover:text-green-800 transition duration-300">Tentang Kami</a>
                 <a href="{{ url('/') }}#kontak" class="text-gray-700 hover:text-green-800 transition duration-300">Kontak</a>
                 @auth

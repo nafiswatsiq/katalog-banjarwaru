@@ -248,11 +248,11 @@
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto lg:px-10 px-4">
             <div class="flex lg:flex-row flex-col gap-4">
-                <div class="w-20 h-20 rounded-full overflow-hidden">
+                <a href="{{ route('store.show', $product->store->slug) }}" class="w-20 h-20 rounded-full overflow-hidden">
                     <img src="{{ $product->store->getFirstMediaUrl('store_images') }}" alt="Product Tabs Icon" class="w-auto h-full object-cover">
-                </div>
+                </a>
                 <div>
-                    <h2 class="text-xl font-semibold text-gray-800">{{ $product->store->name }}</h2>
+                    <a href="{{ route('store.show', $product->store->slug) }}" class="text-xl font-semibold text-gray-800 hover:underline">{{ $product->store->name }}</a>
                     <p class="text-gray-600">{{ $product->store->description }}</p>
                     <p class="mt-2 text-gray-600">WhatsApp: {{ $product->store->whatsapp }}</p>
                     <p class=" text-gray-600">Alamat: {{ $product->store->address }}</p>

@@ -25,6 +25,16 @@ class Store extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function productCount(): int
+    {
+        return $this->products()->count();
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('store_images')

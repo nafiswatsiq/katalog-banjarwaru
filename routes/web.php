@@ -10,6 +10,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Verify;
 use App\Livewire\Home;
 use App\Livewire\Products;
+use App\Livewire\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,9 @@ Route::view('/test', 'welcome')->name('test');
 Route::get('/', Home\Index::class)->name('home');
 Route::get('/produk', Products\Index::class)->name('products.index');
 Route::get('/produk/{slug}', Products\Show::class)->name('products.show');
+
+Route::get('/toko', Store\Index::class)->name('store.index');
+Route::get('/toko/{slug}', Store\Show::class)->name('store.show');
 
 // Route::middleware('guest')->group(function () {
 //     Route::get('login', Login::class)
